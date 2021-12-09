@@ -4,7 +4,7 @@ import { Draggable } from "react-beautiful-dnd";
 import { AiFillEdit, AiFillDelete } from "react-icons/ai";
 import { MdDone } from "react-icons/md";
 import { Todo } from "../interface/interface";
-
+import { Flex, Input, Box, Text } from "@chakra-ui/react";
 const SingleTodo: React.FC<{
   todo: Todo;
   todos: Todo[];
@@ -38,19 +38,30 @@ const SingleTodo: React.FC<{
       )
     );
   };
+  const generateColor = () =>
+    "#" +
+    Math.floor(Math.random() * 0xffffff)
+      .toString(16)
+      .padEnd(6, "0");
 
   return (
     <Draggable draggableId={todo.id.toString()} index={index}>
       {(provided, snapshot) => (
-        <form
-          className={`todos__single ${snapshot.isDragging ? "drag" : ""}`}
+        <Flex
+          className={`${snapshot.isDragging ? "drag" : ""}`}
+          as="form"
+          bg="#7d35b9"
+          w="80%"
+          p="15"
+          my="4"
+          borderRadius="8px"
           onSubmit={(e) => handleEdit(e, todo.id)}
           ref={provided.innerRef}
           {...provided.draggableProps}
           {...provided.dragHandleProps}
         >
           {edit ? (
-            <input
+            <Input
               value={editTodo}
               onChange={(e) => setEditTodo(e.target.value)}
               className="todos__single--text"
@@ -61,8 +72,9 @@ const SingleTodo: React.FC<{
           ) : (
             <span className="todos__single--text">{todo.todo}</span>
           )}
-          <div>
-            <span
+          <Box>
+            <Text
+              as="span"
               className="icon"
               onClick={() => {
                 if (!edit && !todo.isDone) {
@@ -71,15 +83,15 @@ const SingleTodo: React.FC<{
               }}
             >
               <AiFillEdit />
-            </span>
+            </Text>
             <span className="icon" onClick={() => handleDelete(todo.id)}>
               <AiFillDelete />
             </span>
             <span className="icon" onClick={() => handleDone(todo.id)}>
               <MdDone />
             </span>
-          </div>
-        </form>
+          </Box>
+        </Flex>
       )}
     </Draggable>
   );
