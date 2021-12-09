@@ -1,7 +1,7 @@
 import React from "react";
 import { Todo } from "../interface/interface";
 import SingleTodo from "./SingleTodo";
-import { Box, Heading, Flex, Spacer } from "@chakra-ui/react";
+import { Heading, Flex, Spacer } from "@chakra-ui/react";
 import { Droppable } from "react-beautiful-dnd";
 interface props {
   todos: Todo[];
@@ -18,12 +18,19 @@ const TodoList: React.FC<props> = ({
 }) => {
   return (
     <Flex w="900px" justify="center" align="center" gridGap="5">
-      <Droppable droppableId="todolist">
-        {(provided) => (
+      <Droppable droppableId="TodosList">
+        {(provided, snapshot) => (
           <Flex
+            className={`todos ${snapshot.isDraggingOver ? "dragactive" : ""}`}
             flexDirection="column"
-            className="todos"
-            w="300px"
+            mt="10"
+            w="400px"
+            bg="hotpink"
+            p="6"
+            borderRadius="5px"
+            color="white"
+            justify="center"
+            align="center"
             ref={provided.innerRef}
             {...provided.droppableProps}
           >
@@ -43,11 +50,20 @@ const TodoList: React.FC<props> = ({
       </Droppable>
       <Spacer />
       <Droppable droppableId="importantTodos">
-        {(provided) => (
+        {(provided, snapshot) => (
           <Flex
+            className={`todos  ${
+              snapshot.isDraggingOver ? "dragcomplete" : "remove"
+            }`}
             flexDirection="column"
-            w="300px"
-            bg="green"
+            w="400px"
+            bg="limegreen"
+            mt="10"
+            borderRadius="5px"
+            p="6"
+            color="white"
+            justify="center"
+            align="center"
             ref={provided.innerRef}
             {...provided.droppableProps}
           >

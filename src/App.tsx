@@ -4,7 +4,7 @@ import InputField from "./components/InputField";
 import TodoList from "./components/TodoList";
 import { Todo } from "./interface/interface";
 import { Box, Text } from "@chakra-ui/react";
-import { DragDropContext } from "react-beautiful-dnd";
+import { DragDropContext, DropResult } from "react-beautiful-dnd";
 
 const App: React.FC = () => {
   const [todo, setTodo] = useState<string>("");
@@ -20,8 +20,43 @@ const App: React.FC = () => {
     }
   };
 
+  const onDragEnd = (result: DropResult) => {
+    console.log(result);
+
+    const { source, destination } = result;
+    if (!destination) return;
+    if (
+      destination.droppableId === source.droppableId &&
+      destination.index === source.index
+    )
+      return;
+
+    let add;
+    let active = todos;
+    let important = importantTodos;
+
+    //source logic
+    if (source.droppableId === "TodosList") {
+      add = active[source.index];
+      active.splice(source.index, 1);
+    } else {
+      add = important[source.index];
+      important.splice(source.index, 1);
+    }
+
+    //destination logic
+    if (destination.droppableId === "TodosList") {
+      active.splice(destination.index, 0, add);
+    } else {
+      important.splice(destination.index, 0, add);
+    }
+
+    setImportantTodos(important);
+    setTodos(active);
+  };
+
   return (
-    <DragDropContext onDragEnd={() => {}}>
+    <DragDropContext onDragEnd={onDragEnd}>
       <Box className="App">
         <Text as="span" className="heading">
           Taskify
