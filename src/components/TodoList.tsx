@@ -21,7 +21,7 @@ const TodoList: React.FC<props> = ({
       <Droppable droppableId="TodosList">
         {(provided, snapshot) => (
           <Flex
-            className={`todos ${snapshot.isDraggingOver ? "dragactive" : ""}`}
+            className={`todos ${snapshot.isDraggingOver ? "dragActive" : ""}`}
             flexDirection="column"
             mt="10"
             w="400px"
@@ -53,7 +53,7 @@ const TodoList: React.FC<props> = ({
         {(provided, snapshot) => (
           <Flex
             className={`todos  ${
-              snapshot.isDraggingOver ? "dragcomplete" : "remove"
+              snapshot.isDraggingOver ? "dragImportant" : "remove"
             }`}
             flexDirection="column"
             w="400px"

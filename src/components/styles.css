@@ -75,12 +75,15 @@
   font-size: 25px;
   cursor: pointer;
 }
-.dragactive {
-  background-color: rgb(0, 221, 236);
+.drag {
+  box-shadow: 0 0 20px black;
+}
+.dragActive {
+  background: rgb(0, 221, 236);
 }
 
-.dragcomplete {
-  background-color: rgb(255, 38, 0);
+.dragImportant {
+  background: rgb(255, 38, 0);
 }
 
 .remove {

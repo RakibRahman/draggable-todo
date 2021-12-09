@@ -37,8 +37,8 @@ const App: React.FC = () => {
 
     //source logic
     if (source.droppableId === "TodosList") {
-      add = active[source.index];
-      active.splice(source.index, 1);
+      add = active[source.index]; //select dragged item
+      active.splice(source.index, 1); // remove it from the list
     } else {
       add = important[source.index];
       important.splice(source.index, 1);
@@ -46,7 +46,7 @@ const App: React.FC = () => {
 
     //destination logic
     if (destination.droppableId === "TodosList") {
-      active.splice(destination.index, 0, add);
+      active.splice(destination.index, 0, add); //adding item
     } else {
       important.splice(destination.index, 0, add);
     }
