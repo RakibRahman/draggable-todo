@@ -34,7 +34,7 @@ const TodoList: React.FC<props> = ({
             ref={provided.innerRef}
             {...provided.droppableProps}
           >
-            <Heading> Task List</Heading>
+            <Heading>Usual Task List</Heading>
             {todos?.map((todo, index) => (
               <SingleTodo
                 index={index}
