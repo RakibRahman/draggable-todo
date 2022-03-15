@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./App.css";
 import InputField from "./components/InputField";
 import TodoList from "./components/TodoList";
+import AccordionComp from "./components/Accordion";
 import { Todo } from "./interface/interface";
 import { Box, Text } from "@chakra-ui/react";
 import { DragDropContext, DropResult } from "react-beautiful-dnd";
@@ -56,20 +57,21 @@ const App: React.FC = () => {
   };
 
   return (
-    <DragDropContext onDragEnd={onDragEnd}>
-      <Box className="App">
-        <Text as="span" className="heading">
-          Taskify
-        </Text>
-        <InputField todo={todo} setTodo={setTodo} handleAdd={handleAdd} />
-        <TodoList
-          todos={todos}
-          setTodos={setTodos}
-          importantTodos={importantTodos}
-          setImportantTodos={setImportantTodos}
-        />
-      </Box>
-    </DragDropContext>
+    // <DragDropContext onDragEnd={onDragEnd}>
+    //   <Box className="App">
+    //     <Text as="span" className="heading">
+    //       Taskify
+    //     </Text>
+    //     <InputField todo={todo} setTodo={setTodo} handleAdd={handleAdd} />
+    //     <TodoList
+    //       todos={todos}
+    //       setTodos={setTodos}
+    //       importantTodos={importantTodos}
+    //       setImportantTodos={setImportantTodos}
+    //     />
+    //   </Box>
+    // </DragDropContext>
+    <AccordionComp />
   );
 };
 
